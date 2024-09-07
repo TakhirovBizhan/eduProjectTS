@@ -29,9 +29,16 @@ export const lastWord = (fullWord: string) => {
 
 //fourth task
 
+export const constartMeasure = (L1: number, L2: number) => {
+    if(L1 < L2){
+        return null;
+    }
+    const result = (L1 - L2) / (L1 + L2);
+    return Math.round(result * 100) / 100;
+}
 
 //fifth task
-/*
+
 interface IBracketPares {
     normal: string[],
     figure: string[],
@@ -44,20 +51,19 @@ const BracketPares: IBracketPares = {
     cube: ['[', ']'],
 }
 
-let stack: string[] = [];
+const stack: string[] = [];
 
-const bracketValidity = (bracketList: string) => {
+export const bracketValidity = (bracketList: string) => {
     const bracketArray = bracketList.split('');
 
-    for(let i: number; i < bracketArray; i++){
-        if(bracketArray[i] === BracketPares.normal[0] || BracketPares.figure[0] || BracketPares.cube[0]){
-            stack.push(bracketArray[i])
+    for(const bracket of bracketArray) {
+        if(bracket === BracketPares.normal[0] || bracket === BracketPares.figure[0] || bracket === BracketPares.cube[0]) {
+            stack.push(bracket)
         }
+        console.log(stack)
     }
 
 }
-
-*/
 
 
 

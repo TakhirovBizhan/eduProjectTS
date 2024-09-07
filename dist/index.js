@@ -22,12 +22,26 @@ export const lastWord = (fullWord) => {
     }
     return null;
 };
+//fourth task
+export const constartMeasure = (L1, L2) => {
+    if (L1 < L2) {
+        return null;
+    }
+    const result = (L1 - L2) / (L1 + L2);
+    return Math.round(result * 100) / 100;
+};
 const BracketPares = {
     normal: ['(', ')'],
     figure: ['{', '}'],
     cube: ['[', ']'],
 };
-let stack = [];
-const bracketValidity = (bracketList) => {
+const stack = [];
+export const bracketValidity = (bracketList) => {
     const bracketArray = bracketList.split('');
+    for (const bracket of bracketArray) {
+        if (bracket === BracketPares.normal[0] || bracket === BracketPares.figure[0] || bracket === BracketPares.cube[0]) {
+            stack.push(bracket);
+        }
+        console.log(stack);
+    }
 };
