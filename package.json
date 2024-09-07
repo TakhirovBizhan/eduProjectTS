@@ -1,0 +1,23 @@
+{
+  "name": "typescript-takhirovbizhan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc --watch",
+    "lint": "eslint \"src/**/*.{ts,js}\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "@types/eslint__js": "^8.42.3",
+    "@typescript-eslint/eslint-plugin": "^8.4.0",
+    "@typescript-eslint/parser": "^8.4.0",
+    "eslint": "^9.10.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.4.0"
+  }
+}
