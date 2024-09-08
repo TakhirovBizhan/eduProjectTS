@@ -45,22 +45,30 @@ interface IBracketPares {
     cube: string[],
 }
 
-const BracketPares: IBracketPares = {
+
+const bracketValidity = (bracketList: string) => {
+    const BracketPares: IBracketPares = {
     normal: ['(', ')'],
     figure: ['{', '}'],
     cube: ['[', ']'],
 }
-
-const stack: string[] = [];
-
-export const bracketValidity = (bracketList: string) => {
+    const stack: string[] = [];
     const bracketArray = bracketList.split('');
 
-    for(const bracket of bracketArray) {
-        if(bracket === BracketPares.normal[0] || bracket === BracketPares.figure[0] || bracket === BracketPares.cube[0]) {
+    for (const bracket of bracketArray) {
+        if (bracket === BracketPares.normal[0] || bracket === BracketPares.figure[0] || bracket === BracketPares.cube[0]) {
             stack.push(bracket)
         }
-        console.log(stack)
+        else if (bracket === BracketPares.normal[1] && stack.at(-1) === BracketPares.normal[0]
+            || bracket === BracketPares.figure[1] && stack.at(-1) === BracketPares.figure[0]
+            || bracket === BracketPares.cube[1] && stack.at(-1) === BracketPares.figure[0]) {
+            stack.pop()
+        }
+    }
+    if (stack.length === 0) {
+        return 'valid'
+    }else{
+        return 'invalid'
     }
 
 }
