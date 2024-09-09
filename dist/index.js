@@ -30,18 +30,28 @@ export const constartMeasure = (L1, L2) => {
     const result = (L1 - L2) / (L1 + L2);
     return Math.round(result * 100) / 100;
 };
-const BracketPares = {
-    normal: ['(', ')'],
-    figure: ['{', '}'],
-    cube: ['[', ']'],
-};
-const stack = [];
 export const bracketValidity = (bracketList) => {
+    const BracketPares = {
+        normal: ['(', ')'],
+        figure: ['{', '}'],
+        cube: ['[', ']'],
+    };
+    const stack = [];
     const bracketArray = bracketList.split('');
     for (const bracket of bracketArray) {
         if (bracket === BracketPares.normal[0] || bracket === BracketPares.figure[0] || bracket === BracketPares.cube[0]) {
             stack.push(bracket);
         }
-        console.log(stack);
+        else if (bracket === BracketPares.normal[1] && stack.at(-1) === BracketPares.normal[0]
+            || bracket === BracketPares.figure[1] && stack.at(-1) === BracketPares.figure[0]
+            || bracket === BracketPares.cube[1] && stack.at(-1) === BracketPares.figure[0]) {
+            stack.pop();
+        }
+    }
+    if (stack.length === 0) {
+        return 'valid';
+    }
+    else {
+        return 'invalid';
     }
 };

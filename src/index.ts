@@ -46,7 +46,7 @@ interface IBracketPares {
 }
 
 
-const bracketValidity = (bracketList: string) => {
+export const bracketValidity = (bracketList: string) => {
     const BracketPares: IBracketPares = {
     normal: ['(', ')'],
     figure: ['{', '}'],
