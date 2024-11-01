@@ -1,0 +1,25 @@
+{
+  "name": "vite-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --open",
+    "type-check": "tsc --noEmit --watch",
+    "start:dev": "npm-run-all --parallel type-check dev",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.12.2",
+    "vite": "^5.4.10"
+  },
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
+}
