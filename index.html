@@ -1,13 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script defer type="module" src="/src/main.ts"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Management</title>
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+  <h1>Course Management</h1>
+
+  <section>
+    <h2>Add Student</h2>
+    <input type="text" id="studentName" placeholder="Student Name">
+    <input type="email" id="studentEmail" placeholder="Student Email">
+    <input type="number" id="entranceYear" placeholder="Entrance Year">
+    <button id="addStudentButton">Add Student</button>
+    <ul id="studentList"></ul>
+  </section>
+
+  <section>
+    <h2>Add Teacher</h2>
+    <input type="text" id="teacherName" placeholder="Teacher Name">
+    <input type="email" id="teacherEmail" placeholder="Teacher Email">
+    <select id="academicDegree">
+      <option value="отсутствует">No Degree</option>
+      <option value="к.н.">Candidate of Sciences</option>
+      <option value="д.н.">Doctor of Sciences</option>
+    </select>
+    <button id="addTeacherButton">Add Teacher</button>
+    <ul id="teacherList"></ul>
+  </section>
+
+  <section>
+    <h2>Add Course</h2>
+    <input type="text" id="courseName" placeholder="Course Name">
+    <input type="number" id="courseLimit" placeholder="Student Limit">
+    <button id="addCourseButton">Add Course</button>
+    <ul id="courseList"></ul>
+  </section>
+
+  <section>
+    <h2>Assign Users to Course</h2>
+    <select id="selectCourse">
+    </select>
+    <select id="selectUserType">
+      <option value="student">Student</option>
+      <option value="teacher">Teacher</option>
+    </select>
+    <select id="selectUser">
+    </select>
+    <button id="assignUserButton">Assign to Course</button>
+  </section>
+
+  <script src="src/index.ts" type="module"></script>
+</body>
 </html>
