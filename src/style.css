@@ -28,6 +28,11 @@
   font-family: Arial, sans-serif;
 }
 
+.course_list li {
+  display: flex;
+  gap: 20px;
+}
+
 body {
   background-color: #f4f4f9;
   color: #333;
@@ -41,6 +46,11 @@ h1 {
   margin: 20px 0;
   font-size: 2em;
   color: #4a4a8a;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
 }
 
 section {
@@ -108,4 +118,9 @@ ul li button {
 
 ul li button:hover {
   background-color: #c0392b;
+}
+
+#studentList li button {
+  
+  max-width: 50px;
 }
