@@ -120,7 +120,34 @@ ul li button:hover {
   background-color: #c0392b;
 }
 
+
 #studentList li button {
-  
-  max-width: 50px;
+  margin-top: 10px;
+  display: block;
+  max-width: 75px;
+}
+
+#teacherList li button {
+  margin-top: 10px;
+  display: block;
+  max-width: 75px;
+}
+
+#courseList li {
+  display: flex;
+  width: 250px;
+  flex-direction: row;
+  column-gap: 30px;
+  flex-wrap: wrap;
+}
+
+
+details ul li {
+  justify-content: center !important;
+  width: 125px !important;
+  gap: 10px !important;
+}
+
+details ul li button { 
+  width: 75px;
 }

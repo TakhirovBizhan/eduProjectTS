@@ -9,34 +9,50 @@
 <body>
   <h1>Course Management</h1>
 
-  <section>
-    <h2>Добавить студента</h2>
-    <input type="text" id="studentName" placeholder="Student Name">
-    <input type="email" id="studentEmail" placeholder="Student Email">
-    <input type="number" id="entranceYear" placeholder="Entrance Year">
-    <button id="addStudentButton">Добавить студента</button>
-    <ul id="studentList"></ul>
+  <section style="display: flex; gap: 30px;">
+    <div>
+      <h2>Добавить студента</h2>
+      <input type="text" id="studentName" placeholder="Student Name">
+      <input type="email" id="studentEmail" placeholder="Student Email">
+      <input type="number" id="entranceYear" placeholder="Entrance Year">
+      <button id="addStudentButton">Добавить студента</button>
+    </div>
+    <div>
+      <h2>Список студентов</h2>
+      <ul id="studentList" style="width: 250px; display: flex; flex-direction: column;">
+      </ul>
+    </div>
   </section>
 
-  <section>
-    <h2>Добавить Преподавателя</h2>
-    <input type="text" id="teacherName" placeholder="Teacher Name">
-    <input type="email" id="teacherEmail" placeholder="Teacher Email">
-    <select id="academicDegree">
-      <option value="отсутствует">без звания</option>
-      <option value="к.н.">Кандидат наук</option>
-      <option value="д.н.">Доктор наук</option>
-    </select>
-    <button id="addTeacherButton">Добавить преподавателя</button>
-    <ul id="teacherList"></ul>
+  <section style="display: flex; gap: 30px;">
+    <div>
+      <h2>Добавить Преподавателя</h2>
+      <input type="text" id="teacherName" placeholder="Teacher Name">
+      <input type="email" id="teacherEmail" placeholder="Teacher Email">
+      <select id="academicDegree">
+        <option value="отсутствует">без звания</option>
+        <option value="к.н.">Кандидат наук</option>
+        <option value="д.н.">Доктор наук</option>
+      </select>
+      <button id="addTeacherButton">Добавить преподавателя</button>
+    </div>
+    <div>
+      <h2>Список преподавателей</h2>
+      <ul id="teacherList" style="width: 250px;"></ul>
+    </div>
   </section>
 
-  <section>
-    <h2>Добавить курс</h2>
-    <input type="text" id="courseName" placeholder="Course Name">
-    <input type="number" id="courseLimit" placeholder="Student Limit">
-    <button id="addCourseButton">Добавить курс</button>
-    <ul class="course_list" id="courseList"></ul>
+  <section style="display: flex; gap: 30px;">
+    <div>
+      <h2>Добавить курс</h2>
+      <input type="text" id="courseName" placeholder="Course Name">
+      <input type="number" id="courseLimit" placeholder="Student Limit">
+      <button id="addCourseButton">Добавить курс</button>
+    </div>
+    <div>
+      <h2>Список курсов</h2>
+      <ul class="course_list" id="courseList"></ul>
+    </div>
   </section>
 
   <section>

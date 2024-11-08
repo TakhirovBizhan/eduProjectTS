@@ -19,12 +19,6 @@
       "name": "Булат",
       "email": "bulat@example.ru",
       "entranceYear": 2023
-    },
-    {
-      "id": "f41003ee-4205-4502-98e1-60d2477c35fd",
-      "name": "Федор",
-      "email": "Fedor@example.ru",
-      "entranceYear": 2023
     }
   ],
   "courses": [
@@ -39,29 +33,8 @@
           "name": "Булат",
           "email": "bulat@example.ru",
           "entranceYear": 2023
-        },
-        {
-          "id": "41e0ff57-da2e-4570-b678-3067ce6b0859",
-          "name": "Бижан",
-          "email": "bijan@example.ru",
-          "entranceYear": 2023
         }
       ],
-      "teachers": [
-        {
-          "id": "16a9542a-6c15-4fed-aab4-62f5bedb7baf",
-          "name": "Иван Юрьевич",
-          "email": "ivan@example.ru",
-          "academicDegree": "к.н."
-        }
-      ]
-    },
-    {
-      "id": "8c210c9f-8d91-400f-9e76-c4d84ca3c36d",
-      "name": "ППИ",
-      "limit": 20,
-      "status": "черновик",
-      "students": [],
       "teachers": [
         {
           "id": "16a9542a-6c15-4fed-aab4-62f5bedb7baf",
