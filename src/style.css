@@ -141,6 +141,10 @@ ul li button:hover {
   flex-wrap: wrap;
 }
 
+#courseList li p {
+padding-left: 10px;
+}
+
 
 details ul li {
   justify-content: center !important;

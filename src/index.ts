@@ -23,18 +23,30 @@ document.getElementById('addStudentButton')?.addEventListener('click', async () 
   const student = new Student(studentNameInput.value, studentEmailInput.value, parseInt(entranceYearInput.value));
   await userRepo.addStudent(student);
   loadStudents();
+
+   studentNameInput.value = '';
+   studentEmailInput.value = '';
+   entranceYearInput.value = '';
 });
 
 document.getElementById('addTeacherButton')?.addEventListener('click', async () => {
   const teacher = new Teacher(teacherNameInput.value, teacherEmailInput.value, academicDegreeSelect.value as 'отсутствует' | 'к.н.' | 'д.н.');
   await userRepo.addTeacher(teacher);
   loadTeachers();
+
+  teacherNameInput.value = '';
+  teacherEmailInput.value = '';
+  academicDegreeSelect.value = '';
 });
 
 document.getElementById('addCourseButton')?.addEventListener('click', async () => {
   const course = new Course(courseNameInput.value, parseInt(courseLimitInput.value), 'черновик');
   await courseRepo.addCourse(course);
   loadCourses();
+
+
+  courseNameInput.value = '';
+  courseLimitInput.value = '';
 });
 
 async function loadStudents() {
