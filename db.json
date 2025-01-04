@@ -1,48 +1,5 @@
 {
-  "teachers": [
-    {
-      "id": "16a9542a-6c15-4fed-aab4-62f5bedb7baf",
-      "name": "Иван Юрьевич",
-      "email": "ivan@example.ru",
-      "academicDegree": "к.н."
-    }
-  ],
-  "students": [
-    {
-      "id": "41e0ff57-da2e-4570-b678-3067ce6b0859",
-      "name": "Бижан",
-      "email": "bijan@example.ru",
-      "entranceYear": 2023
-    },
-    {
-      "id": "8f18539e-3edf-4a7f-b6d9-a67811ddf519",
-      "name": "Булат",
-      "email": "bulat@example.ru",
-      "entranceYear": 2023
-    }
-  ],
-  "courses": [
-    {
-      "id": "af40943d-6c64-49c1-9aa9-82ef581ed709",
-      "name": "Веб-технологии",
-      "limit": 24,
-      "status": "активный",
-      "students": [
-        {
-          "id": "8f18539e-3edf-4a7f-b6d9-a67811ddf519",
-          "name": "Булат",
-          "email": "bulat@example.ru",
-          "entranceYear": 2023
-        }
-      ],
-      "teachers": [
-        {
-          "id": "16a9542a-6c15-4fed-aab4-62f5bedb7baf",
-          "name": "Иван Юрьевич",
-          "email": "ivan@example.ru",
-          "academicDegree": "к.н."
-        }
-      ]
-    }
-  ]
+  "teachers": [],
+  "students": [],
+  "courses": []
 }

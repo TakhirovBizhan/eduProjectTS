@@ -1,71 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Course Management</title>
+  <title>управление курсами</title>
   <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
-  <h1>Course Management</h1>
+  <h1>Управление курсами</h1>
 
-  <section style="display: flex; gap: 30px;">
-    <div>
-      <h2>Добавить студента</h2>
-      <input type="text" id="studentName" placeholder="ФИО">
-      <input type="email" id="studentEmail" placeholder="Почта">
-      <input type="number" id="entranceYear" placeholder="Год поступления">
-      <button id="addStudentButton">Добавить студента</button>
+  <section>
+    <div class="form__block">
+      <div>
+        <h2>Добавить студента</h2>
+        <input type="text" id="studentName" placeholder="ФИО">
+        <input type="email" id="studentEmail" placeholder="Почта">
+        <input type="number" id="entranceYear" placeholder="Год поступления">
+        <button id="addStudentButton">Добавить студента</button>
+      </div>
+      <div>
+        <h2>Добавить преподавателя</h2>
+        <input type="text" id="teacherName" placeholder="Имя преподавателя">
+        <input type="email" id="teacherEmail" placeholder="Почта">
+        <select id="Ученая степень">
+          <option value="отсутствует">без звания</option>
+          <option value="к.н.">Кандидат наук</option>
+          <option value="д.н.">Доктор наук</option>
+        </select>
+        <button id="addTeacherButton">Добавить преподавателя</button>
+      </div>
     </div>
-    <div>
-      <h2>Список студентов</h2>
-      <ul id="studentList" style="width: 250px; display: flex; flex-direction: column;">
-      </ul>
-    </div>
-  </section>
+  
+    <div class="form__block">
 
-  <section style="display: flex; gap: 30px;">
-    <div>
-      <h2>Добавить преподавателя</h2>
-      <input type="text" id="teacherName" placeholder="Имя преподавателя">
-      <input type="email" id="teacherEmail" placeholder="Почта">
-      <select id="Ученая степень">
-        <option value="отсутствует">без звания</option>
-        <option value="к.н.">Кандидат наук</option>
-        <option value="д.н.">Доктор наук</option>
-      </select>
-      <button id="Добавь преподавателя">Добавить преподавателя</button>
-    </div>
-    <div>
-      <h2>Список преподавателей</h2>
-      <ul id="teacherList" style="width: 250px;"></ul>
-    </div>
-  </section>
+      <div class="form__block__course">
+        <h2>Добавить курс</h2>
+        <input type="text" id="courseName" placeholder="Название курса">
+        <input type="number" id="courseLimit" placeholder="Лимит">
+        <button id="addCourseButton">Добавить курс</button>
+      </div>
+  
+      <div>
+        <h2>Записать на курс</h2>
+        <select id="selectCourse">
+        </select>
+        <select id="selectUserType">
+          <option value="student">Студенты</option>
+          <option value="teacher">Преподаватели</option>
+        </select>
+        <select id="selectUser">
+        </select>
+        <button id="assignUserButton">Записать на курс</button>
+      </div>
 
-  <section style="display: flex; gap: 30px;">
-    <div>
-      <h2>Добавить курс</h2>
-      <input type="text" id="courseName" placeholder="Название курса">
-      <input type="number" id="courseLimit" placeholder="Лимит">
-      <button id="addCourseButton">Добавить курс</button>
-    </div>
-    <div>
-      <h2>Список курсов</h2>
-      <ul class="course_list" id="courseList"></ul>
     </div>
   </section>
 
   <section>
-    <h2>Добавить пользователей на курс</h2>
-    <select id="selectCourse">
-    </select>
-    <select id="selectUserType">
-      <option value="student">Студенты</option>
-      <option value="teacher">Преподаватели</option>
-    </select>
-    <select id="selectUser">
-    </select>
-    <button id="assignUserButton">Записать на курс</button>
+    <div>
+      <h2>Список преподавателей</h2>
+      <ul id="teacherList" style="width: 250px;"></ul>
+    </div>
+    
+    <div>
+      <h2>Список студентов</h2>
+      <ul id="studentList" style="width: 250px; display: flex; flex-direction: column;">
+      </ul>
+
+      <div>
+        <h2>Список курсов</h2>
+        <ul class="course_list" id="courseList"></ul>
+      </div>
+    </div>
   </section>
 
   <script src="src/index.ts" type="module"></script>

@@ -55,7 +55,7 @@ li {
 
 section {
   width: 90%;
-  max-width: 600px;
+  max-width: 1440px;
   background: white;
   padding: 20px;
   margin: 20px 0;
@@ -88,6 +88,9 @@ button {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: fit-content;
+  padding-left: 14px;
+  padding-right: 14px;
 }
 
 button:hover {
@@ -154,4 +157,25 @@ details ul li {
 
 details ul li button { 
   width: 75px;
+  background-color: red;
+}
+
+.form__block {
+  display: flex; 
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  height: fit-content;
+}
+
+.form__block div {
+  max-width: 400px;
+  max-height: 248px;
+}
+
+.form__block__course {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
 }
