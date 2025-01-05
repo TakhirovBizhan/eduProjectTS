@@ -72,8 +72,7 @@ h2 {
 }
 
 input,
-select,
-button {
+select {
   font-size: 1em;
   padding: 10px;
   margin-bottom: 10px;
@@ -84,6 +83,8 @@ button {
 
 button {
   background-color: #4a4a8a;
+  padding: 10px;
+  border-radius: 5px;
   color: white;
   border: none;
   cursor: pointer;
@@ -102,21 +103,25 @@ ul {
   padding: 0;
 }
 
+.sum__item {
+  width: 228px !important;
+}
+
 ul li {
   padding: 10px;
-  background-color: #f9f9fc;
+  background-color: #ebf1ff;
   margin: 5px 0;
   border: 1px solid #d1d1e0;
   border-radius: 5px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
 }
 
 ul li button {
-  padding: 5px 10px;
-  font-size: 0.9em;
+  padding: 4px 8px;
+  font-size: 0.6em;
   background-color: #e74c3c;
+  border-radius: 5px;
 }
 
 ul li button:hover {
@@ -125,15 +130,31 @@ ul li button:hover {
 
 
 #studentList li button {
-  margin-top: 10px;
   display: block;
   max-width: 75px;
 }
 
-#teacherList li button {
-  margin-top: 10px;
-  display: block;
-  max-width: 75px;
+#teacherList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+ li {
+  width: 220px;
+}
+
+
+#studentList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#courseList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 #courseList li {
@@ -142,21 +163,15 @@ ul li button:hover {
   flex-direction: row;
   column-gap: 30px;
   flex-wrap: wrap;
+  height: fit-content;
 }
 
 #courseList li p {
 padding-left: 10px;
 }
 
-
-details ul li {
-  justify-content: center !important;
-  width: 125px !important;
-  gap: 10px !important;
-}
-
 details ul li button { 
-  width: 75px;
+  width: fit-content;
   background-color: red;
 }
 
@@ -194,4 +209,11 @@ input:valid {
 
 input:invalid {
   border: 1px solid red;
+}
+
+.text {
+  width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

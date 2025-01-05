@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Student, Teacher, Course, UserIntersection } from "./main.ts";
+import { showToast } from "./toast.ts";
 
 const API_BASE_URL = "http://localhost:3000"; // Адрес JSON Server
 
@@ -28,8 +29,12 @@ export class UserRepository {
   }
 
   async getStudents() {
-    const response = await axios.get(`${API_BASE_URL}/students`);
-    return response.data;
+    try {
+      const response = await axios.get(`${API_BASE_URL}/students`);
+      return response.data;
+    } catch (e) {
+      showToast(`${e}`, 'red', true)
+    }
   }
 
   async getStudentById(userId: string) {
@@ -99,25 +104,25 @@ export class CourseRepository {
     await axios.delete(`${API_BASE_URL}/courses/${id}`);
   }
 
-  async addUserToCourse(courseId: string, user: UserIntersection) {
-    try {
-      // Сначала получаем текущий объект курса
-      const { data: course } = await axios.get(`${API_BASE_URL}/courses/${courseId}`);
-  
-      if ("entranceYear" in user) {
-        // Если это студент, добавляем его в массив `students`
-        const updatedStudents = [...course.students, user];
-        await axios.patch(`${API_BASE_URL}/courses/${courseId}`, { students: updatedStudents });
-      } else {
-        // Если это преподаватель, добавляем его в массив `teachers`
-        const updatedTeachers = [...course.teachers, user];
-        await axios.patch(`${API_BASE_URL}/courses/${courseId}`, { teachers: updatedTeachers });
-      }
-    } catch (error) {
-      console.error("Error adding user to course:", error);
+  async addUserToCourse(courseId: string, user: UserIntersection): Promise<void> {
+    const { data: course } = await axios.get<Course>(`${API_BASE_URL}/courses/${courseId}`);
+
+    if (course.limit && course.limit === course.students.length + course.teachers.length) {
+      throw new Error('Limit was reached!');
+    }
+
+    if (course.students.find((student) => { return student.id === user.id }) || course.teachers.find((teacher) => { return teacher.id === user.id })) {
+      throw new Error('User already assigned to course!');
+    }
+
+    if ("entranceYear" in user) {
+      const updatedStudents = [...course.students, user];
+      await axios.patch(`${API_BASE_URL}/courses/${courseId}`, { students: updatedStudents });
+    } else {
+      const updatedTeachers = [...course.teachers, user];
+      await axios.patch(`${API_BASE_URL}/courses/${courseId}`, { teachers: updatedTeachers });
     }
   }
-  
   async deleteUserFromCourse(
     courseId: string,
     userId: string,
@@ -126,7 +131,7 @@ export class CourseRepository {
     try {
       // Получаем текущие данные курса
       const { data: course } = await axios.get(`${API_BASE_URL}/courses/${courseId}`);
-  
+
       if (userType === "students") {
         // Фильтруем массив студентов, исключая указанного студента
         const updatedStudents = course.students.filter((student: UserIntersection) => student.id !== userId);

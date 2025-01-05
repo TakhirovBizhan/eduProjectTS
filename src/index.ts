@@ -34,6 +34,7 @@ async function handleStudentFormSubmit(event: SubmitEvent) {
     if (studentName && studentEmail && studentEntranceYear) {
       const student = new Student(studentName, studentEmail, studentEntranceYear);
       await userRepo.addStudent(student);
+      showToast(`${studentName} was added!`, 'green')
     }
     loadStudents();
     studentForm.reset();
@@ -62,6 +63,7 @@ async function handleTeacherFormSubmit(event: SubmitEvent) {
     if (teacherName && teacherEmail && teacherAcademicDegree) {
       const teacher = new Teacher(teacherName, teacherEmail, teacherAcademicDegree as 'отсутствует' | 'к.н.' | 'д.н.');
       await userRepo.addTeacher(teacher);
+      showToast(`${teacherName} was added!`, 'green')
     }
     loadTeachers();
     teacherForm.reset();
@@ -87,6 +89,7 @@ async function handleCourseFormSubmit(event: SubmitEvent) {
     if (courseName && limit) {
       const course = new Course(courseName, limit, 'черновик');
       await courseRepo.addCourse(course);
+      showToast(`${courseName} was created!`, 'green')
     }
     loadCourses();
     courseForm.reset();
@@ -100,7 +103,19 @@ async function loadStudents() {
   studentList.innerHTML = '';
   students.forEach((student: Student) => {
     const li = document.createElement('li');
-    li.textContent = `${student.name} (${student.entranceYear})`;
+    const pName = document.createElement('p');
+    const pYear = document.createElement('p');
+    const pMail = document.createElement('p');
+
+    pName.textContent = student.name;
+    pYear.textContent = `Поступление: ${student.entranceYear} г.`;
+    pMail.textContent = `Почта: ${student.email}`
+    pName.classList.add('text');
+    pMail.classList.add('text');
+
+    li.appendChild(pName);
+    li.appendChild(pYear);
+    li.appendChild(pMail);
     li.appendChild(createDeleteButton(() => deleteStudent(student.id)));
     studentList.appendChild(li);
   });
@@ -112,7 +127,18 @@ async function loadTeachers() {
   teacherList.innerHTML = '';
   teachers.forEach((teacher: Teacher) => {
     const li = document.createElement('li');
-    li.textContent = `${teacher.name} (${teacher.academicDegree})`;
+    const pName = document.createElement('p');
+    const pDegree = document.createElement('p');
+    const pMail = document.createElement('p');
+
+    pName.classList.add('text');
+    pMail.classList.add('text');
+    pName.textContent = teacher.name;
+    pDegree.textContent = `Степень: ${teacher.academicDegree}`;
+    pMail.textContent = `почта: ${teacher.email}`
+    li.appendChild(pName);
+    li.appendChild(pDegree);
+    li.appendChild(pMail);
     li.appendChild(createDeleteButton(() => deleteTeacher(teacher.id)));
     teacherList.appendChild(li);
   });
@@ -146,10 +172,11 @@ async function loadCourses() {
     const studentList = document.createElement('ul');
     course.students.forEach((student: Student) => {
       const studentLi = document.createElement('li');
+      studentLi.classList.add('sum__item')
       studentLi.textContent = student.name;
 
       const deleteStudentButton = document.createElement('button');
-      deleteStudentButton.textContent = 'Убрать';
+      deleteStudentButton.textContent = 'X';
       deleteStudentButton.addEventListener('click', async () => {
         await courseRepo.deleteUserFromCourse(course.id, student.id, 'students');
         loadCourses();
@@ -167,15 +194,18 @@ async function loadCourses() {
     const teacherList = document.createElement('ul');
     course.teachers.forEach((teacher: Teacher) => {
       const teacherLi = document.createElement('li');
-      teacherLi.textContent = teacher.name;
+      const teacherPi = document.createElement('p')
+      teacherPi.textContent = teacher.name;
+      teacherLi.classList.add('sum__item')
 
       // Кнопка удаления преподавателя
       const deleteTeacherButton = document.createElement('button');
-      deleteTeacherButton.textContent = 'Убрать';
+      deleteTeacherButton.textContent = 'X';
       deleteTeacherButton.addEventListener('click', async () => {
         await courseRepo.deleteUserFromCourse(course.id, teacher.id, 'teachers');
         loadCourses();
       });
+      teacherLi.appendChild(teacherPi)
       teacherLi.appendChild(deleteTeacherButton);
       teacherList.appendChild(teacherLi);
     });
@@ -262,10 +292,17 @@ document.getElementById('assignUserButton')!.addEventListener('click', async () 
   const userType = (document.getElementById('selectUserType') as HTMLSelectElement).value;
 
   if (userId && courseId) {
-    const user = userType === 'student' ? await userRepo.getStudentById(userId) : await userRepo.getTeacherById(userId);
-    await courseRepo.addUserToCourse(courseId, user);
-    showToast(`${user.name} has been assigned to the course.`, 'green');
-    populateCourses();
+    try {
+      const user = userType === 'student'
+        ? await userRepo.getStudentById(userId)
+        : await userRepo.getTeacherById(userId);
+
+      await courseRepo.addUserToCourse(courseId, user);
+      showToast(`${user.name} has been assigned to the course.`, 'green');
+      populateCourses();
+    } catch (e) {
+      showToast(`${e}`, 'red');
+    }
   }
 });
 

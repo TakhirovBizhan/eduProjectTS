@@ -1,5 +1,5 @@
 // toast notification
-export function showToast(message: string, color: 'green' | 'red') {
+export function showToast(message: string, color: 'green' | 'red', timeStump?: boolean) {
   const toast = document.createElement('div');
   toast.classList.add('toast');
   toast.textContent = message;
@@ -17,10 +17,12 @@ export function showToast(message: string, color: 'green' | 'red') {
     }
   }, 100);
 
-  setTimeout(() => {
-    toast.style.opacity = '0';
+  if (timeStump === false || timeStump === undefined) {
     setTimeout(() => {
-      toast.remove();
-    }, 500);
-  }, 3000);
+      toast.style.opacity = '0';
+      setTimeout(() => {
+        toast.remove();
+      }, 500);
+    }, 3000);
+  }
 }
