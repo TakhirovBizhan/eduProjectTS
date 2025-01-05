@@ -13,21 +13,25 @@
     <div class="form__block">
       <div>
         <h2>Добавить студента</h2>
-        <input type="text" id="studentName" placeholder="ФИО">
-        <input type="email" id="studentEmail" placeholder="Почта">
-        <input type="number" id="entranceYear" placeholder="Год поступления">
-        <button id="addStudentButton">Добавить студента</button>
+        <form id="studentForm">
+          <input type="text" id="studentName" name="name" placeholder="ФИО" required>
+          <input type="email" id="studentEmail"  placeholder="Почта" autocomplete="email" name="email" required>
+          <input type="number" id="entranceYear" name="entranceYear" placeholder="Год поступления" required>
+          <button id="addStudentButton" type="submit">Добавить студента</button>
+        </form>
       </div>
       <div>
         <h2>Добавить преподавателя</h2>
-        <input type="text" id="teacherName" placeholder="Имя преподавателя">
-        <input type="email" id="teacherEmail" placeholder="Почта">
-        <select id="Ученая степень">
-          <option value="отсутствует">без звания</option>
-          <option value="к.н.">Кандидат наук</option>
-          <option value="д.н.">Доктор наук</option>
-        </select>
-        <button id="addTeacherButton">Добавить преподавателя</button>
+        <form id="teacherForm">
+          <input type="text" id="teacherName" name="name" placeholder="Имя преподавателя" required>
+          <input type="email" id="teacherEmail" placeholder="Почта" autocomplete="email" name="email" required>
+          <select name="academicDegree" id="academicDegree">
+            <option value="отсутствует">без звания</option>
+            <option value="к.н.">Кандидат наук</option>
+            <option value="д.н.">Доктор наук</option>
+          </select>
+          <button id="addTeacherButton" type="submit">Добавить преподавателя</button>
+        </form>
       </div>
     </div>
   
@@ -35,9 +39,11 @@
 
       <div class="form__block__course">
         <h2>Добавить курс</h2>
-        <input type="text" id="courseName" placeholder="Название курса">
-        <input type="number" id="courseLimit" placeholder="Лимит">
-        <button id="addCourseButton">Добавить курс</button>
+        <form id="courseForm" class="course__form">
+          <input type="text" name="name" id="courseName" placeholder="Название курса">
+          <input type="number" name="limit" id="courseLimit" placeholder="Лимит">
+          <button id="addCourseButton" type="submit">Добавить курс</button>
+        </form>
       </div>
   
       <div>
@@ -59,12 +65,12 @@
   <section>
     <div>
       <h2>Список преподавателей</h2>
-      <ul id="teacherList" style="width: 250px;"></ul>
+      <ul id="teacherList"></ul>
     </div>
     
     <div>
       <h2>Список студентов</h2>
-      <ul id="studentList" style="width: 250px; display: flex; flex-direction: column;">
+      <ul id="studentList">
       </ul>
 
       <div>

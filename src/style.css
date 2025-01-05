@@ -176,6 +176,22 @@ details ul li button {
 .form__block__course {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
+  justify-content: space-between;
+}
+
+.course__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+input:valid {
+  border: 1px solid green;
+
+}
+
+input:invalid {
+  border: 1px solid red;
 }

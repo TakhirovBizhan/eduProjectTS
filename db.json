@@ -1,5 +1,35 @@
 {
-  "teachers": [],
-  "students": [],
-  "courses": []
+  "teachers": [
+    {
+      "id": "a1ff3f68-b39d-4c8d-b556-5212f5a45471",
+      "name": "dsad",
+      "email": "dsad@dsa",
+      "academicDegree": "отсутствует"
+    }
+  ],
+  "students": [
+    {
+      "id": "bc709c9f-09b2-4e78-89cc-b64ec2f39aea",
+      "name": "coolcats",
+      "email": "coolcats@mail.com",
+      "entranceYear": 2222
+    }
+  ],
+  "courses": [
+    {
+      "id": "03175441-e93a-4373-913a-c98eb9f7fab5",
+      "name": "dsada",
+      "limit": 2,
+      "status": "черновик",
+      "students": [],
+      "teachers": [
+        {
+          "id": "a1ff3f68-b39d-4c8d-b556-5212f5a45471",
+          "name": "dsad",
+          "email": "dsad@dsa",
+          "academicDegree": "отсутствует"
+        }
+      ]
+    }
+  ]
 }

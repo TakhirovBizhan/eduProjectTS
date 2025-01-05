@@ -5,49 +5,95 @@ import { showToast } from './toast.ts';
 const userRepo = new UserRepository();
 const courseRepo = new CourseRepository();
 
-const studentNameInput = document.getElementById('studentName') as HTMLInputElement;
-const studentEmailInput = document.getElementById('studentEmail') as HTMLInputElement;
-const entranceYearInput = document.getElementById('entranceYear') as HTMLInputElement;
 const studentList = document.getElementById('studentList') as HTMLUListElement;
 
-const teacherNameInput = document.getElementById('teacherName') as HTMLInputElement;
-const teacherEmailInput = document.getElementById('teacherEmail') as HTMLInputElement;
-const academicDegreeSelect = document.getElementById('academicDegree') as HTMLSelectElement;
 const teacherList = document.getElementById('teacherList') as HTMLUListElement;
 
-const courseNameInput = document.getElementById('courseName') as HTMLInputElement;
-const courseLimitInput = document.getElementById('courseLimit') as HTMLInputElement;
 const courseList = document.getElementById('courseList') as HTMLUListElement;
 
-document.getElementById('addStudentButton')?.addEventListener('click', async () => {
-  const student = new Student(studentNameInput.value, studentEmailInput.value, parseInt(entranceYearInput.value));
-  await userRepo.addStudent(student);
-  loadStudents();
-
-   studentNameInput.value = '';
-   studentEmailInput.value = '';
-   entranceYearInput.value = '';
-});
-
-document.getElementById('addTeacherButton')?.addEventListener('click', async () => {
-  const teacher = new Teacher(teacherNameInput.value, teacherEmailInput.value, academicDegreeSelect.value as 'отсутствует' | 'к.н.' | 'д.н.');
-  await userRepo.addTeacher(teacher);
-  loadTeachers();
-
-  teacherNameInput.value = '';
-  teacherEmailInput.value = '';
-  academicDegreeSelect.value = '';
-});
-
-document.getElementById('addCourseButton')?.addEventListener('click', async () => {
-  const course = new Course(courseNameInput.value, parseInt(courseLimitInput.value), 'черновик');
-  await courseRepo.addCourse(course);
-  loadCourses();
+const studentForm = document.getElementById('studentForm') as HTMLFormElement;
+const teacherForm = document.getElementById('teacherForm') as HTMLFormElement;
+const courseForm = document.getElementById('courseForm') as HTMLFormElement;
 
 
-  courseNameInput.value = '';
-  courseLimitInput.value = '';
-});
+//форма для добавления студента
+if (studentForm) {
+  studentForm.addEventListener("submit", handleStudentFormSubmit)
+}
+
+async function handleStudentFormSubmit(event: SubmitEvent) {
+  event.preventDefault()
+
+  try {
+    const formData = new FormData(studentForm)
+
+    const studentName = formData.get('name')?.toString()
+    const studentEmail = formData.get('email')?.toString()
+    const studentEntranceYear = Number(formData.get('entranceYear')?.toString())
+
+    if (studentName && studentEmail && studentEntranceYear) {
+      const student = new Student(studentName, studentEmail, studentEntranceYear);
+      await userRepo.addStudent(student);
+    }
+    loadStudents();
+    studentForm.reset();
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+//форма для добавления преподавателя
+if (teacherForm) {
+  teacherForm.addEventListener("submit", handleTeacherFormSubmit)
+}
+
+async function handleTeacherFormSubmit(event: SubmitEvent) {
+  event.preventDefault()
+
+  try {
+    const formData = new FormData(teacherForm)
+
+    const teacherName = formData.get('name')?.toString()
+    const teacherEmail = formData.get('email')?.toString()
+    const teacherAcademicDegree = formData.get('academicDegree')?.toString()
+
+    console.log(teacherName, teacherEmail, teacherAcademicDegree)
+
+    if (teacherName && teacherEmail && teacherAcademicDegree) {
+      const teacher = new Teacher(teacherName, teacherEmail, teacherAcademicDegree as 'отсутствует' | 'к.н.' | 'д.н.');
+      await userRepo.addTeacher(teacher);
+    }
+    loadTeachers();
+    teacherForm.reset();
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+//форма для добавления курса
+if (courseForm) {
+  courseForm.addEventListener("submit", handleCourseFormSubmit)
+}
+
+async function handleCourseFormSubmit(event: SubmitEvent) {
+  event.preventDefault()
+
+  try {
+    const formData = new FormData(courseForm)
+
+    const courseName = formData.get('name')?.toString()
+    const limit = Number(formData.get('limit')?.toString())
+
+    if (courseName && limit) {
+      const course = new Course(courseName, limit, 'черновик');
+      await courseRepo.addCourse(course);
+    }
+    loadCourses();
+    courseForm.reset();
+  } catch (e) {
+    console.error(e)
+  }
+}
 
 async function loadStudents() {
   const students = await userRepo.getStudents();
@@ -78,25 +124,25 @@ async function loadCourses() {
   courses.forEach((course: Course) => {
     const li = document.createElement('li');
 
-     const nameParagraph = document.createElement('p');
-     nameParagraph.textContent = `${course.name}`;
- 
-     const limitParagraph = document.createElement('p');
-     limitParagraph.textContent = `Лимит: ${course.limit}`;
- 
-     const enrolledParagraph = document.createElement('p');
-     enrolledParagraph.textContent = `Записаны: ${course.students.length + course.teachers.length}/${course.limit}`;
- 
-     li.appendChild(nameParagraph);
-     li.appendChild(limitParagraph);
-     li.appendChild(enrolledParagraph);
- 
-    
+    const nameParagraph = document.createElement('p');
+    nameParagraph.textContent = `${course.name}`;
+
+    const limitParagraph = document.createElement('p');
+    limitParagraph.textContent = `Лимит: ${course.limit}`;
+
+    const enrolledParagraph = document.createElement('p');
+    enrolledParagraph.textContent = `Записаны: ${course.students.length + course.teachers.length}/${course.limit}`;
+
+    li.appendChild(nameParagraph);
+    li.appendChild(limitParagraph);
+    li.appendChild(enrolledParagraph);
+
+
     const studentDetails = document.createElement('details');
     const studentSummary = document.createElement('summary');
     studentSummary.textContent = 'Студенты';
     studentDetails.appendChild(studentSummary);
-    
+
     const studentList = document.createElement('ul');
     course.students.forEach((student: Student) => {
       const studentLi = document.createElement('li');
@@ -117,7 +163,7 @@ async function loadCourses() {
     const teacherSummary = document.createElement('summary');
     teacherSummary.textContent = 'Преподаватели';
     teacherDetails.appendChild(teacherSummary);
-    
+
     const teacherList = document.createElement('ul');
     course.teachers.forEach((teacher: Teacher) => {
       const teacherLi = document.createElement('li');
@@ -161,7 +207,7 @@ async function deleteCourse(id: string) {
 
 function createDeleteButton(onClick: () => void) {
   const button = document.createElement('button');
-  button.textContent = 'Удалить';
+  button.textContent = 'X';
   button.addEventListener('click', onClick);
   return button;
 }
@@ -182,51 +228,51 @@ function createStatusDropdown(courseId: string, currentStatus: 'черновик
 }
 
 async function populateCourses() {
-    const courses = await courseRepo.getCourses();
-    const courseSelect = document.getElementById('selectCourse') as HTMLSelectElement;
-    courseSelect.innerHTML = '';
-    courses.forEach((course: Course) => {
-      const option = document.createElement('option');
-      option.value = course.id;
-      option.textContent = course.name;
-      courseSelect.appendChild(option);
-    });
-  }
-  
-  async function populateUsers(userType: 'student' | 'teacher') {
-    const userSelect = document.getElementById('selectUser') as HTMLSelectElement;
-    userSelect.innerHTML = '';
-    const users = userType === 'student' ? await userRepo.getStudents() : await userRepo.getTeachers();
-    users.forEach((user: UserIntersection) => {
-      const option = document.createElement('option');
-      option.value = user.id;
-      option.textContent = user.name;
-      userSelect.appendChild(option);
-    });
-  }
-  
-  document.getElementById('selectUserType')!.addEventListener('change', (e) => {
-    const userType = (e.target as HTMLSelectElement).value as 'student' | 'teacher';
-    populateUsers(userType);
+  const courses = await courseRepo.getCourses();
+  const courseSelect = document.getElementById('selectCourse') as HTMLSelectElement;
+  courseSelect.innerHTML = '';
+  courses.forEach((course: Course) => {
+    const option = document.createElement('option');
+    option.value = course.id;
+    option.textContent = course.name;
+    courseSelect.appendChild(option);
   });
-  
-  document.getElementById('assignUserButton')!.addEventListener('click', async () => {
-    const courseId = (document.getElementById('selectCourse') as HTMLSelectElement).value;
-    const userId = (document.getElementById('selectUser') as HTMLSelectElement).value;
-    const userType = (document.getElementById('selectUserType') as HTMLSelectElement).value;
-  
-    if (userId && courseId) {
-      const user = userType === 'student' ? await userRepo.getStudentById(userId) : await userRepo.getTeacherById(userId);
-      await courseRepo.addUserToCourse(courseId, user);
-      showToast(`${user.name} has been assigned to the course.`, 'green');
-      populateCourses();
-    }
-  });
-  
-  
+}
 
-  populateCourses();
-  populateUsers('student');
+async function populateUsers(userType: 'student' | 'teacher') {
+  const userSelect = document.getElementById('selectUser') as HTMLSelectElement;
+  userSelect.innerHTML = '';
+  const users = userType === 'student' ? await userRepo.getStudents() : await userRepo.getTeachers();
+  users.forEach((user: UserIntersection) => {
+    const option = document.createElement('option');
+    option.value = user.id;
+    option.textContent = user.name;
+    userSelect.appendChild(option);
+  });
+}
+
+document.getElementById('selectUserType')!.addEventListener('change', (e) => {
+  const userType = (e.target as HTMLSelectElement).value as 'student' | 'teacher';
+  populateUsers(userType);
+});
+
+document.getElementById('assignUserButton')!.addEventListener('click', async () => {
+  const courseId = (document.getElementById('selectCourse') as HTMLSelectElement).value;
+  const userId = (document.getElementById('selectUser') as HTMLSelectElement).value;
+  const userType = (document.getElementById('selectUserType') as HTMLSelectElement).value;
+
+  if (userId && courseId) {
+    const user = userType === 'student' ? await userRepo.getStudentById(userId) : await userRepo.getTeacherById(userId);
+    await courseRepo.addUserToCourse(courseId, user);
+    showToast(`${user.name} has been assigned to the course.`, 'green');
+    populateCourses();
+  }
+});
+
+
+
+populateCourses();
+populateUsers('student');
 
 loadStudents();
 loadTeachers();
